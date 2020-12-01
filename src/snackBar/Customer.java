@@ -5,6 +5,8 @@
 
 package snackBar;
 
+import java.text.DecimalFormat;
+
 public class Customer
 {
     // fields

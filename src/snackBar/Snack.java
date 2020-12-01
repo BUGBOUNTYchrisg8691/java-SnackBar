@@ -5,6 +5,8 @@
 
 package snackBar;
 
+import java.text.DecimalFormat;
+
 public class Snack
 {
     // fields
@@ -14,15 +16,27 @@ public class Snack
     private int quantity;
     private double cost;
     private int vendingMachineId;
+    private String vendingMachineName;
+
+    // stretch - cost formatter
+    DecimalFormat df = new DecimalFormat("$###,###.00");
 
     // constructor
-    public Snack(String name, int quantity, double cost, int vendingMachineId)
+    public Snack(String name, int quantity, double cost, int vendingMachineId, String vendingMachineName)
     {
         this.id = maxId++;
         this.name = name;
         this.quantity = quantity;
         this.cost = cost;
         this.vendingMachineId = vendingMachineId;
+        this.vendingMachineName = vendingMachineName;
+    }
+
+    // stretch - toString override
+    @Override
+    public String toString()
+    {
+        return "Snack: " + name + "\nVending Machine Name: " + vendingMachineName + "\nQuantity: " + quantity + "\nTotalCost: " + df.format(cost * quantity);
     }
 
     // Getters and Setters
@@ -66,6 +80,16 @@ public class Snack
         this.vendingMachineId = vendingMachineId;
     }
 
+    public String getVendingMachineName()
+    {
+        return vendingMachineName;
+    }
+
+    public void setVendingMachineName(String vendingMachineName)
+    {
+        this.vendingMachineName = vendingMachineName;
+    }
+
     // methods
     public void addToQuantity(int quantity)
     {
@@ -76,7 +100,7 @@ public class Snack
     public void buySnack(int quantity)
     {
         this.quantity -= quantity;
-        System.out.println("Bought " + quantity + " of " + name + " for $" + (cost * quantity));
+        System.out.println("Bought " + quantity + " of " + name + " for " + df.format(cost * quantity));
     }
 
     public double getTotalCost(int quantity)
